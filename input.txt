@@ -1,0 +1,4 @@
+Productno, Class, Productname, description, price, [size], [color]
+01,Hat,tophat, golden rosett, 2000, N/A,N/A
+02,Trousers, Gympants, gympants for working out, 34.44,44,Black
+03, Shirt, Tank Top, TankTop with logo, 400, 34, Red
