@@ -11,64 +11,58 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserIO {
-    private String target = "/Users/Robert/Javacode/HomeWork4/input.txt";
-    private FileIO fileIO = new FileIO();
-    private Main main = new Main();
+    private String target;
+    private FileIO fileIO;
+    private Repository repository;
+
+    public UserIO(Repository repository, FileIO fileIO, String target) {
+        this.repository = repository;
+        this.fileIO = fileIO;
+        this.target = target;
+    }
 
     public void readFromUser() {
-        try {
             try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));){
                 String line;
                 do {
-                    System.out.println("Add To Create, SearchClass or SearchText, p to print\nq to quit");
+                    System.out.println("1: To Create\n"+
+                                        "2: SearchClass\n" +
+                                        "3: SearchText\n" +
+                                        "4: To print\n" +                    
+                                        "q: to quit\n");
                     switch (line = br.readLine()) {
-                        case "Add": {
+                        case "1": {
                             System.out.println("Productno, Class, Productname, description, price, [size], [color]\n");
                             line = br.readLine();
                             this.fileIO.writeToFile(line, this.target);
                             break;
                         }
-                        case "SearchClass": {
+                        case "2": {
                             System.out.println("Class Of Products");
                             line = br.readLine();
-                            this.searchText(line, true);
+                            repository.searchByClass(line);
                             break;
                         }
-                        case "p": {
-                            this.printProducts();
-                            break;
-                        }
-                        case "SearchText": {
+
+                        case "3": {
                             System.out.println("Text In Products");
                             line = br.readLine();
-                            this.searchText(line, false);
+                            repository.searchByText(line);
+                            break;
                         }
+
+                        case "4": {
+                            System.out.println("Products");
+                            repository.print();
+                            break;
+                        }
+
                     }
                 } while (!line.equals("q"));
             }
-        }
-        catch (IOException iOException) {
-            iOException.printStackTrace();
+        catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
-    private void printProducts() throws IOException {
-        List<String> strings = this.fileIO.readFromFile(this.target);
-        List<Product> products = new ArrayList<>();
-        for(String s : strings) {
-            products.add(this.main.chooser(s));
-        }
-        products.forEach(item -> System.out.println(item));
-    }
-
-    private void searchText(String string, boolean bl) throws IOException {
-        List<String> strings = this.fileIO.findWordsInFile(string, this.target, bl);
-        List<Product> products = new ArrayList<>();
-        for (String s : strings) {
-            Product product = this.main.chooser(s);
-            products.add(product);
-        }
-        System.out.println();
-        products.forEach(product -> System.out.println(product));
-    }
 }

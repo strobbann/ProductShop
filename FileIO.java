@@ -11,59 +11,39 @@ import java.util.List;
 
 public class FileIO {
 
-    public List<String> readFromFile(String target) {
-        List<String> strings = new ArrayList<>();
+    private Repository repository;
+
+    public FileIO(Repository repository,String target) {
+        this.repository = repository;
+        readFromFile(target);
+    }
+
+
+    public void readFromFile(String target) {
         try (BufferedReader br = new BufferedReader(new FileReader(target));){
             String line = null;
-            boolean firstTime = true;
+            int i = 0;
             while ((line = br.readLine()) != null) {
-                if (firstTime) {
-                    firstTime = !firstTime;
-                } else {
-                    strings.add(line);
+                if (i == 0) {
+                    i = i == 0 ? 1 : 0;
+                    continue;
                 }
+                repository.add(line);
             }
         }
         catch (IOException ex) {
             ex.printStackTrace();
         }
-        return strings;
     }
 
     public void writeToFile(String text, String toTarget) {
         try (BufferedWriter br = new BufferedWriter(new FileWriter(toTarget, true))){
             br.write(text + "\n");
+            repository.add(text);
         }
         catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    public List<String> findWordsInFile(String searchWord, String target, boolean searchClass) {
-        List<String> strings = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(target))){
-            String line = null;
-            boolean firstTime = true;
-            while ((line = br.readLine()) != null) {
-                if(firstTime){
-                    firstTime = !firstTime;
-                }else{
-                    if (searchClass) {
-                        String className = StringHandler.getStringFromArrayTrimmed(1, line);
-                        if(className.equals(searchWord)){
-                            strings.add(line);
-                        }
-                    } else if(line.toLowerCase().contains(searchWord.toLowerCase())){
-                        strings.add(line);
-                    }
-                }
-            }
-            return strings;
-        }
-        catch (IOException ex) {
-            ex.printStackTrace();
-
-        }
-        return strings;
-    }
 }

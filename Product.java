@@ -49,8 +49,19 @@ public class Product
     return price;
   }
 
-  public String toString()
-  {
+  public String printAsTable() {
+      return String.format("%-15s%-15d%-15s%15s%s%s%f",
+      getClassName(),
+getProductNumber(),
+getProductName(),
+getProductDescription(),
+getSize(),
+getColour(),
+getPrice());
+}
+
+  @Override
+  public String toString() {
     return String.format("Product class       : %s\n" +
                             "Product Number      : %d\n" +
                             "Product Name        : %s\n" +
