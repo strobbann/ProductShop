@@ -1,6 +1,3 @@
-/*
- * Decompiled with CFR 0.139.
- */
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,15 +9,15 @@ import java.util.List;
 
 public class UserIO {
     private String target;
-    private FileIO fileIO;
     private Repository repository;
+    private ObjectIO objectIO;
 
-    public UserIO(Repository repository, FileIO fileIO, String target) {
+    public UserIO(Repository repository, String target, ObjectIO objectIO) {
         this.repository = repository;
-        this.fileIO = fileIO;
         this.target = target;
+        this.objectIO = objectIO;
     }
-
+    @SuppressWarnings("unchecked")
     public void readFromUser() {
             try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));){
                 String line;
@@ -28,13 +25,15 @@ public class UserIO {
                     System.out.println("1: To Create\n"+
                                         "2: SearchClass\n" +
                                         "3: SearchText\n" +
-                                        "4: To print\n" +                    
+                                        "4: To print\n" +
                                         "q: to quit\n");
                     switch (line = br.readLine()) {
                         case "1": {
                             System.out.println("Productno, Class, Productname, description, price, [size], [color]\n");
+                            System.out.println("does not work for now");
                             line = br.readLine();
-                            this.fileIO.writeToFile(line, this.target);
+                            repository.add(line);
+                            objectIO.writeObject(repository);
                             break;
                         }
                         case "2": {

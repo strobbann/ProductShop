@@ -2,3 +2,6 @@ Productno, Class, Productname, description, price, [size], [color]
 01,Hat,tophat, golden rosett, 2000, N/A,N/A
 02,Trousers, Gympants, gympants for working out, 34.44,44,Black
 03, Shirt, Tank Top, TankTop with logo, 400, 34, Red
+04, Trousers,Jeans, jeans with rips, 500, 23, Blue
+20,Hat, Super Hat, Its a super hat, 24,N/A,N/A
+22,Trousers,Big pants, Very big pants, 323, 45, Yellow

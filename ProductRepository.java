@@ -1,6 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
-public class ProductRepository implements Repository{
+public class ProductRepository implements Repository {
     private List<Product> products;
 
     public ProductRepository() {

@@ -12,10 +12,11 @@ import java.util.List;
 public class FileIO {
 
     private Repository repository;
-
+    private String target;
     public FileIO(Repository repository,String target) {
         this.repository = repository;
-        readFromFile(target);
+        this.target = target;
+        this.repository = repository;
     }
 
 

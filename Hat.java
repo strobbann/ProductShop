@@ -1,6 +1,3 @@
-/*
- * Decompiled with CFR 0.139.
- */
 public class Hat extends Accessories implements Returnable {
     public Hat(String inLine) {
         super(inLine);

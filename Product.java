@@ -1,5 +1,5 @@
-public class Product
-{
+import java.io.Serializable;
+public class Product implements Serializable{
   private String className;
   private int productNumber;
   private String productName;
